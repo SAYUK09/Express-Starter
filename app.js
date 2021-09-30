@@ -4,10 +4,13 @@ const express = require("express");
 const demoRoute = require("./routes/demo.route.js");
 const logger = require("./utils/logger");
 const morgan = require("morgan");
+const cors = require("cors");
+const { corsOptions } = require("./config/corsConfig");
 const { port } = require("./config/envConfig");
 
 const app = express();
 
+app.use(cors(corsOptions));
 app.use(morgan("tiny"));
 
 app.get("/", (req, res) => {

@@ -11,7 +11,7 @@ const options = {
     colorize: false,
   },
   console: {
-    level: "info", //Only level more important than info will be consoled
+    level: "debug", //Only level more important than info will be consoled
     handleExceptions: true,
   },
 };
