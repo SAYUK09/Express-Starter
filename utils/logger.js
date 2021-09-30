@@ -11,19 +11,25 @@ const options = {
     colorize: false,
   },
   console: {
-    level: "debug",
+    level: "info", //Only level more important than info will be consoled
     handleExceptions: true,
-    json: false,
-    colorize: true,
   },
 };
 
 const logger = winston.createLogger({
   levels: winston.config.npm.levels,
   transports: [
-    new winston.transports.File(options.file),
+    //   will log information to app.log file.
+    // new winston.transports.File(options.file),
     new winston.transports.Console(options.console),
   ],
+  format: winston.format.combine(
+    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
+    winston.format.colorize({ all: true }),
+    winston.format.printf(
+      (data) => `${data.timestamp} ${data.level}: ${data.message}  `
+    )
+  ),
   exitOnError: false,
 });
 
